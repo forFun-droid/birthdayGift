@@ -18,16 +18,14 @@ function nextScreen(number) {
         "screen" + number
     );
 
-    // Hide current screen
     current.classList.remove("active");
 
-    // Update screen number
     activeScreen = number;
 
-    // Show next screen
     next.classList.add("active");
 
-    // Update progress dots
+    next.scrollTop = 0;
+
     document.querySelectorAll(".dot").forEach(
         (dot, index) => {
             dot.classList.toggle(
@@ -37,10 +35,10 @@ function nextScreen(number) {
         }
     );
 
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
+    // 🎉 Birthday shoutout celebration!
+    if (number === 3) {
+        birthdayShoutout();
+    }
 }
 
 
@@ -73,6 +71,58 @@ function createHeart() {
 
 // Create hearts at intervals
 setInterval(createHeart, 850);
+
+
+function birthdayShoutout() {
+
+    const colors = [
+        "#f5b8c2",
+        "#ffda9e",
+        "#c9b4e5",
+        "#b8d9c3",
+        "#ffffff"
+    ];
+
+    for (let i = 0; i < 150; i++) {
+
+        const piece = document.createElement("div");
+
+        piece.className = "confetti";
+
+        piece.style.left = Math.random() * 100 + "vw";
+        piece.style.width = "9px";
+        piece.style.height = "13px";
+
+        piece.style.backgroundColor =
+            colors[Math.floor(Math.random() * colors.length)];
+
+        piece.style.borderRadius =
+            Math.random() > 0.5 ? "50%" : "3px";
+
+        document.body.appendChild(piece);
+
+        const animation = piece.animate(
+            [
+                {
+                    transform: "translateY(-20px) rotate(0deg)",
+                    opacity: 1
+                },
+                {
+                    transform:
+                        `translateY(110vh) rotate(${Math.random() * 900}deg)`,
+                    opacity: 0
+                }
+            ],
+            {
+                duration: 2500 + Math.random() * 2500,
+                easing: "ease-in"
+            }
+        );
+
+        animation.onfinish = () => piece.remove();
+    }
+}
+
 
 
 // FINAL BIRTHDAY CELEBRATION
@@ -130,4 +180,56 @@ function celebrate() {
         };
     }
 
+}
+
+// BIRTHDAY SHOUTOUT CONFETTI
+
+function birthdayShoutout() {
+
+    const colors = [
+        "#f5b8c2",
+        "#ffda9e",
+        "#c9b4e5",
+        "#b8d9c3",
+        "#ffffff",
+        "#f4a6c1"
+    ];
+
+    for (let i = 0; i < 180; i++) {
+
+        const piece = document.createElement("div");
+
+        piece.className = "confetti";
+
+        piece.style.left = Math.random() * 100 + "vw";
+        piece.style.width = "10px";
+        piece.style.height = "13px";
+
+        piece.style.backgroundColor =
+            colors[Math.floor(Math.random() * colors.length)];
+
+        piece.style.borderRadius =
+            Math.random() > 0.5 ? "50%" : "3px";
+
+        document.body.appendChild(piece);
+
+        const animation = piece.animate(
+            [
+                {
+                    transform: "translateY(-20px) rotate(0deg)",
+                    opacity: 1
+                },
+                {
+                    transform: `translateY(110vh) rotate(${Math.random() * 1000}deg)`,
+                    opacity: 0
+                }
+            ],
+            {
+                duration: 3000 + Math.random() * 2500,
+                easing: "ease-in"
+            }
+        );
+
+        animation.onfinish = () => piece.remove();
+    }
 }
